@@ -54,6 +54,30 @@ with DAG(
         bash_command='python3 /opt/airflow/data-cleaning-pipeline/pre-cleaning-analysis-scripts/move-relevant-files.py',
     )
 
+    # Cleaning and grouping tasks
+    consolidate_same_header_csv_files = BashOperator(
+        task_id='consolidate_same_header_csv_files',
+        bash_command='python3 /opt/airflow/data-cleaning-pipeline/cleaning-grouping-scripts/consolidate-same-header-csv-files-into-one-file.py',
+    )
+
+    group_codes_from_all_files = BashOperator(
+        task_id='group_codes_from_all_files',
+        bash_command='python3 /opt/airflow/data-cleaning-pipeline/cleaning-grouping-scripts/group-codes-from-all-files.py',
+    )
+
+    extract_insurance_companies = BashOperator(
+        task_id='extract_insurance_companies',
+        bash_command='python3 /opt/airflow/data-cleaning-pipeline/cleaning-grouping-scripts/extract_insurance-companies.py',
+    )
+
+    extract_searchable_fields = BashOperator(
+        task_id='extract_searchable_fields',
+        bash_command='python3 /opt/airflow/data-cleaning-pipeline/cleaning-grouping-scripts/extract-searchable-fields.py',
+    )
+
     dummy_operator = DummyOperator(task_id='end_dummy_task')
 
-    fetch_hospital_files >> [count_number_of_occurrences_header_in_csv_and_json, find_any, find_cpt_codes, generate_collected_data_statistics, most_common_headers] >> move_relevant_files >> dummy_operator
+    fetch_hospital_files >> [count_number_of_occurrences_header_in_csv_and_json, find_any, find_cpt_codes, generate_collected_data_statistics,
+                             most_common_headers] >> move_relevant_files
+    move_relevant_files >> [consolidate_same_header_csv_files, group_codes_from_all_files, extract_insurance_companies,
+                            extract_searchable_fields] >> dummy_operator

@@ -1,0 +1,107 @@
+version: 2
+
+models:
+  - name: hospital_charges
+    columns:
+      - name: id
+        tests:
+          - unique
+          - not_null
+      - name: cpt_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('cpt_codes')
+              field: cpt_id
+      - name: payer_id
+        tests:
+          - relationships:
+              to: ref('payers')
+              field: payer_id
+      - name: city_id
+        tests:
+          - relationships:
+              to: ref('cities')
+              field: city_id
+      - name: zipcode_id
+        tests:
+          - relationships:
+              to: ref('zipcodes')
+              field: zipcode_id
+      - name: state_id
+        tests:
+          - relationships:
+              to: ref('states')
+              field: state_id
+      - name: hospital_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('hospitals')
+              field: hospital_id
+
+  - name: cpt_codes
+    columns:
+      - name: cpt_id
+        tests:
+          - unique
+          - not_null
+      - name: cpt_code
+        tests:
+          - unique
+          - not_null
+
+  - name: payers
+    columns:
+      - name: payer_id
+        tests:
+          - unique
+          - not_null
+      - name: payer
+        tests:
+          - unique
+          - not_null
+
+  - name: cities
+    columns:
+      - name: city_id
+        tests:
+          - unique
+          - not_null
+      - name: city
+        tests:
+          - unique
+          - not_null
+
+  - name: zipcodes
+    columns:
+      - name: zipcode_id
+        tests:
+          - unique
+          - not_null
+      - name: zipcode
+        tests:
+          - unique
+          - not_null
+
+  - name: states
+    columns:
+      - name: state_id
+        tests:
+          - unique
+          - not_null
+      - name: state
+        tests:
+          - unique
+          - not_null
+
+  - name: hospitals
+    columns:
+      - name: hospital_id
+        tests:
+          - unique
+          - not_null
+      - name: hospital
+        tests:
+          - unique
+          - not_null

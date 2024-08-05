@@ -1,0 +1,35 @@
+name: 'hospital_pricing'
+version: '1.0.0'
+config-version: 2
+
+profile: 'hospital_pricing'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  hospital_pricing:
+    staging:
+      +materialized: table
+      +schema: intermediate_cleaning
+    intermediate:
+      +materialized: table
+      +schema: clean_data
+    warehouse:
+      +materialized: table
+      +schema: warehouse
+      +persist_docs:
+        relation: true
+
+vars:
+  source_database: staging_db
+  staging_table: staging_table

@@ -1,0 +1,49 @@
+version: 2
+
+models:
+  - name: stg_hospital_charges_cleaned
+    description: "Cleaned and transformed hospital charges data"
+    columns:
+      - name: id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+      - name: cpt_code
+        description: "5-digit CPT code"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['regex:^[0-9]{5}$']
+      - name: cash_discount
+        description: "Cash discount amount"
+      - name: deidentified_max_allowed
+        description: "Maximum allowed deidentified amount"
+      - name: deidentified_min_allowed
+        description: "Minimum allowed deidentified amount"
+      - name: payer_id
+        description: "Payer information"
+      - name: gross_charge
+        description: "Gross charge amount"
+      - name: payer_allowed_amount
+        description: "Payer allowed amount"
+      - name: description
+        description: "Description of the charge"
+      - name: city_id
+        description: "City of the hospital"
+        tests:
+          - not_null
+      - name: zipcode_id
+        description: "Zip code of the hospital"
+        tests:
+          - not_null
+      - name: hospital_id
+        description: "Name of the hospital"
+        tests:
+          - not_null
+      - name: state_id
+        description: "State of the hospital"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['regex:^[A-Z]{2}$']

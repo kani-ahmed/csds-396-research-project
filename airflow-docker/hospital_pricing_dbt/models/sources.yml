@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: staging_db
+    database: "{{ var('source_database') }}"
+    schema: staging_db
+    tables:
+      - name: staging_table
+        identifier: "{{ var('staging_table') }}"
