@@ -8,8 +8,9 @@
 
 SELECT
     cpt_id,
-    cpt_code
-FROM {{ ref('cpt_codes') }}  -- Reference the 'cpt_codes' model in the warehouse directory
+    cpt_code,
+    description
+FROM {{ ref('cpt_codes') }}
 {% if is_incremental() %}
 WHERE cpt_id > (SELECT COALESCE(MAX(cpt_id), 0) FROM {{ this }})
 {% endif %}

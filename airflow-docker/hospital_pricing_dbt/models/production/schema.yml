@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: hospital_charges
+  - name: fact_hospital_charges
     columns:
       - name: id
         tests:
@@ -30,7 +30,7 @@ models:
               to: ref('hospitals')
               field: hospital_id
 
-  - name: cpt_codes
+  - name: fact_cpt_codes
     columns:
       - name: cpt_id
         tests:
@@ -41,7 +41,7 @@ models:
           - unique
           - not_null
 
-  - name: payers
+  - name: fact_payers
     columns:
       - name: payer_id
         tests:
@@ -52,7 +52,7 @@ models:
           - unique
           - not_null
 
-  - name: locations
+  - name: fact_locations
     columns:
       - name: location_id
         tests:
@@ -68,7 +68,7 @@ models:
         tests:
           - not_null
 
-  - name: payer_locations
+  - name: fact_payer_locations
     columns:
       - name: id
         tests:
@@ -87,7 +87,7 @@ models:
               to: ref('locations')
               field: location_id
 
-  - name: hospitals
+  - name: fact_hospitals
     columns:
       - name: hospital_id
         tests:

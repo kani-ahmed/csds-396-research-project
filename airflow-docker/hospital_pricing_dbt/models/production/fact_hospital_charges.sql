@@ -18,7 +18,7 @@ SELECT
     description,
     gross_charge,
     payer_allowed_amount
-FROM {{ ref('hospital_charges') }}  -- Reference the 'hospital_charges' model in the warehouse directory
+FROM {{ ref('hospital_charges') }}
 {% if is_incremental() %}
 WHERE id > (SELECT COALESCE(MAX(id), 0) FROM {{ this }})
 {% endif %}
