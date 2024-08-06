@@ -29,6 +29,10 @@ models:
       +schema: warehouse
       +persist_docs:
         relation: true
+    production:
+      +materialized: incremental
+      +schema: production_db
+      +database: production_db
 
 vars:
   source_database: staging_db

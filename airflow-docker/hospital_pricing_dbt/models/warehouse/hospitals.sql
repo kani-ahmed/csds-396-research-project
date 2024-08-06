@@ -1,6 +1,7 @@
-{{ config(
-    materialized='table',
-    schema='warehouse'
-) }}
+{{ config(materialized='table', schema='warehouse') }}
 
-SELECT * FROM {{ ref('dim_hospitals') }}
+SELECT
+    hospital_id,
+    hospital,
+    location_id
+FROM {{ ref('dim_hospitals') }}

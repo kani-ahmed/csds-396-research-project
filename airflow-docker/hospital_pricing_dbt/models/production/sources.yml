@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: warehouse
+    database: _warehouse
+    schema: _warehouse
+    tables:
+      - name: dim_cpt_codes
+      - name: dim_locations
+      - name: dim_hospitals
+      - name: dim_payers
+      - name: fact_hospital_charges
