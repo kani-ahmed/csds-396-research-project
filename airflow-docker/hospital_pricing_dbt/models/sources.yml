@@ -7,3 +7,18 @@ sources:
     tables:
       - name: staging_table
         identifier: "{{ var('staging_table') }}"
+
+  - name: intermediate_cleaning
+    database: "{{ target.database }}"
+    schema: _intermediate_cleaning
+    tables:
+      - name: cpt-translation
+      - name: code_mappings
+        identifier: "*_code_mappings"
+
+  - name: seeds
+    database: "{{ target.database }}"
+    schema: _intermediate_cleaning
+    tables:
+      - name: code_mappings
+        identifier: "*_code_mappings"

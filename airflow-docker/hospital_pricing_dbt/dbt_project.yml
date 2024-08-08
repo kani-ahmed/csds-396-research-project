@@ -16,8 +16,23 @@ clean-targets:
   - "target"
   - "dbt_packages"
 
+seeds:
+  hospital_pricing:
+    schema: intermediate_cleaning
+    cpt_translation:
+      +column_types:
+        "CPT Code": varchar(5)
+        Description: text
+    code_mappings:
+      +enabled: true
+      +schema: intermediate_cleaning
+      +column_types:
+        "Diagnosis Code": varchar(8)
+        Description: text
+
 models:
   hospital_pricing:
+    +database: "{{ target.database }}"
     staging:
       +materialized: table
       +schema: intermediate_cleaning
