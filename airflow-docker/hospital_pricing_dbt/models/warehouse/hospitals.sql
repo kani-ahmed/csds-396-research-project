@@ -2,6 +2,6 @@
 
 SELECT
     hospital_id,
-    hospital,
+    hospital AS hospital_name,
     location_id
 FROM {{ ref('dim_hospitals') }}

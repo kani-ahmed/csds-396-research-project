@@ -7,10 +7,11 @@
 ) }}
 
 SELECT
-    hospital_id,
-    hospital,
-    location_id
-FROM {{ ref('hospitals') }}  -- Reference the 'hospitals' model in the warehouse directory
+    h.hospital_id,
+    h.hospital_name,
+    h.location_id
+FROM {{ ref('hospitals') }} h
+JOIN {{ ref('fact_locations') }} fl ON h.location_id = fl.location_id
 {% if is_incremental() %}
-WHERE hospital_id > (SELECT COALESCE(MAX(hospital_id), 0) FROM {{ this }})
+WHERE h.hospital_id > (SELECT COALESCE(MAX(hospital_id), 0) FROM {{ this }})
 {% endif %}

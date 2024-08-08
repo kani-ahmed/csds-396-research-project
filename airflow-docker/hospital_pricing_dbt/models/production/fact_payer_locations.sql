@@ -7,10 +7,12 @@
 ) }}
 
 SELECT
-    id,
-    payer_id,
-    location_id
-FROM {{ ref('payer_locations') }}
+    pl.id,
+    pl.payer_id,
+    pl.location_id
+FROM {{ ref('payer_locations') }} pl
+JOIN {{ ref('fact_payers') }} fp ON pl.payer_id = fp.payer_id
+JOIN {{ ref('fact_locations') }} fl ON pl.location_id = fl.location_id
 {% if is_incremental() %}
-WHERE id NOT IN (SELECT id FROM {{ this }})
+WHERE pl.id NOT IN (SELECT id FROM {{ this }})
 {% endif %}
