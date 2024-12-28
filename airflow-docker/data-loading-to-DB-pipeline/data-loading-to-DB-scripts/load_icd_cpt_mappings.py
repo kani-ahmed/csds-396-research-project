@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 def load_icd_cpt_mappings(code_mappings_directory):
     # Get all CPT codes from the CptTranslation table and store in a set for quick lookup
-    existing_cpt_codes = {cpt.CPT_Code for cpt in CptTranslation.query.all()}
+    existing_cpt_codes = {cpt.cpt_code for cpt in CptTranslation.query.all()}
 
     files = os.listdir(code_mappings_directory)
     for file in files:

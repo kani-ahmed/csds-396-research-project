@@ -2,7 +2,6 @@
 
 import logging
 import csv
-from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm.exc import NoResultFound
 
 from extensions import db

@@ -1,13 +1,13 @@
-# models/hospital.py
+# models/fact_hospital.py
 from extensions import db
 
-
-class Hospital(db.Model):
-    __tablename__ = 'hospitals'
+class FactHospital(db.Model):
+    __tablename__ = 'fact_hospitals'
 
     hospital_id = db.Column(db.Integer, primary_key=True)
-    hospital = db.Column(db.String(255), nullable=False)
-    location_id = db.Column(db.Integer, db.ForeignKey('locations.location_id'), nullable=False)
+    hospital_name = db.Column(db.String(255), nullable=False)
+    location_id = db.Column(db.Integer, db.ForeignKey('fact_locations.location_id'), nullable=False)
 
-    location = db.relationship('Location', back_populates='hospitals')
-    charges = db.relationship('HospitalCharge', back_populates='hospital')
+
+    location = db.relationship('FactLocation', back_populates='hospitals')
+    charges = db.relationship('FactHospitalCharge', back_populates='hospital')

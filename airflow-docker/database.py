@@ -1,10 +1,7 @@
 # database.py
+from extensions import db, create_app
 
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://airflow:airflow@mysql/airflow'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-db = SQLAlchemy(app)
+def get_db():
+    app = create_app()
+    with app.app_context():
+        yield db.session

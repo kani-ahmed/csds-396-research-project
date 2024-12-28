@@ -38,7 +38,7 @@ def create_warehouse_tables_dag():
         import sys
         from sqlalchemy import create_engine, inspect
         from extensions import create_app
-        from models import FactCPTCode, FactLocation, FactHospital, FactPayer, FactPayerLocation, FactHospitalCharge, FactICDCPTMapping, User
+        from models import FactCPTCode, FactLocation, FactHospital, FactPayer, FactPayerLocation, FactHospitalCharge, FactICDCPTMapping, User, FacilityDetails
 
         logging.basicConfig(level=logging.INFO)
         logger = logging.getLogger(__name__)
@@ -56,6 +56,7 @@ def create_warehouse_tables_dag():
             FactHospitalCharge.__table__.create(engine, checkfirst=True)
             FactICDCPTMapping.__table__.create(engine, checkfirst=True)
             User.__table__.create(engine, checkfirst=True)
+            FacilityDetails.__table__.create(engine, checkfirst=True)
 
             logger.info("All warehouse tables created successfully")
 

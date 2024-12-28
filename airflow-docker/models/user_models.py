@@ -11,7 +11,3 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False, index=True)  # For notifications, also indexed
     profile_picture = db.Column(db.String(255))  # URL to profile picture
     password_hash = db.Column(db.String(128))
-
-    # Define the relationship to MessagesInbox and ChallengesInbox
-    messages_inbox = db.relationship('MessagesInbox', back_populates='user', lazy='dynamic',
-                                     foreign_keys='MessagesInbox.user_id')

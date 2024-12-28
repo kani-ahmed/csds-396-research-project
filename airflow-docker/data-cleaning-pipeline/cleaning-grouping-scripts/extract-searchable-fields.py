@@ -2,12 +2,16 @@
 
 import csv
 import os
+import sys
+
+# Increase the CSV field size limit
+csv.field_size_limit(sys.maxsize)
 
 # Set the path to the input file
-input_file = '/data-cleaning-pipeline-generated-data/all-rows-with-only-CPT-all-csv-files-combined.csv'
+input_file = '/opt/airflow/data/all-rows-with-only-CPT-all-csv-files-combined.csv'
 
 # Set the output directory
-output_dir = '//'
+output_dir = '/opt/airflow/data/data-cleaning-pipeline-generated-data/'
 
 # Initialize sets to store unique values
 cities = set()
@@ -16,7 +20,7 @@ hospitals = set()
 payers = set()
 
 # Read the input file and extract the values
-with open(input_file, 'r') as file:
+with open(input_file, 'r', encoding='utf-8', errors='replace') as file:
     csv_reader = csv.DictReader(file)
     for row in csv_reader:
         cities.add(row['City'])
